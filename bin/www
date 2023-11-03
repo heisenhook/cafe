@@ -4,7 +4,6 @@ const log = require('../util/logger').createLogger('www');
 require('dotenv').config;
 const HOST = process.env.HOST || '127.0.0.1';
 const PORT = process.env.PORT || 3000;
-app.set("port", PORT);
 
 const server = app.listen(PORT, (err) => {
     if (err) log.error(err);
@@ -55,5 +54,5 @@ function onError(error) {
 }
 
 function onListening() {
-    log.info(`server listening @ http://localhost:${server.address().port}`);
+    log.info(`server listening @ http://${HOST}:${PORT}`);
 }
