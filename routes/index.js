@@ -19,7 +19,8 @@ router.get('/', async (req, res, next) => {
         const { result: { locations } } = await locationsApi.listLocations(); // retrieve locations
         const { result: { objects } } = await catalogApi.listCatalog(undefined, types); // retrieve catalogItem & catalogImage
         
-        res.render('index', {  
+        res.render('index', {
+            title: 'index'
             /**
              * todo: implement when frontend exists lol
              * 
