@@ -1,0 +1,65 @@
+:root{
+    --dbg-bg-col: #9273e7;
+    --dbg-header-bg-col: #f09b69;
+    --dbg-content-bg-col: #a169f0;
+    --dbg-item-bg-col: #ff577b;
+}
+
+body {
+    background-color: var(--dbg-bg-col);
+    margin: 0;
+}
+
+header {
+    background-color: var(--dbg-header-bg-col);
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 4px 0;
+    padding: 12px 8px 12px 8px;
+}
+
+header span {
+
+}
+
+header #btns {
+    justify-content: flex-end;
+}
+
+.content {
+    background-color: var(--dbg-content-bg-col);
+    padding: 0 24px 0 24px;
+    display: flex;
+    flex-direction: row;
+    column-gap: 24px;
+}
+
+.filters {
+    background-color: var(--dbg-header-bg-col);
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    row-gap: 4px;
+}
+    
+.filterBox {
+    background-color: white;
+    height: 24px;
+    width: 100px;
+}
+
+.catalog {
+    background-color: var(--dbg-bg-col);
+    display: flex;
+    column-gap: 4px;
+    row-gap: 4px;
+    
+}
+
+.catalogItem {
+    background-color: var(--dbg-item-bg-col);
+    height: 180px;
+    width: 180px;
+}
