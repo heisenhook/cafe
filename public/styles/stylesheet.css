@@ -1,5 +1,5 @@
 :root{
-
+    font-family: Arial, Helvetica, sans-serif;
     --bg-col: #bdbdbd;
     --dbg-bg-col: #9273e7;
     --dbg-header-bg-col: #f09b69;
@@ -18,7 +18,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 4px 0;
     padding: 12px 8px 12px 8px;
 }
 
@@ -33,14 +32,13 @@ header #btns {
 #wrapper {
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 .content {
-    background-color: white;
     border-radius: 8px;
     display: flex;
     flex-direction: row;
-    column-gap: 24px;
     padding: 0 64px 0 64px;
 }
 
@@ -48,24 +46,26 @@ header #btns {
     background-color: var(--dbg-header-bg-col);
     display: flex;
     flex-direction: column;
-    width: 240px;
-    row-gap: 4px;
+    width: 480px;
+    row-gap: 2px;
 }
     
 .filterBox {
-    background-color: red;
+    background-color: white;
+    border: cyan solid 1px;
     border-radius: 4px;
-    width: 100%;
+    font-weight: bold;
     height: 28px;
     display: flex;
     align-items: center;
+    padding-left: 8px;
 }
 
 .catalog {
     background-color: var(--dbg-bg-col);
     display: flex;
-    column-gap: 4px;
-    row-gap: 4px;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .catalogItem {
