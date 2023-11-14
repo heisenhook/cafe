@@ -47,10 +47,39 @@ header #btns {
     background-color: var(--dbg-header-bg-col);
     display: flex;
     flex-direction: column;
-    width: 480px;
-    row-gap: 2px;
+    width: 240px;
+    min-width: 240px;
+    max-width: 240px;
 }
-    
+
+.fCategory {
+    .fHeader {
+        h3 {
+            font-size: 9pt;
+            font-weight: bold;
+            margin: 0;
+            padding: 12px 12px 8px 12px;
+        }
+    }
+
+    ol {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        .fOption:hover {
+            background-color: red;
+        }
+
+        li {
+           a {
+            display: flex;
+            padding: 12px 12px 12px 12px;
+           } 
+        }
+    }
+}
+
 .filterBox {
     background-color: white;
     border: cyan solid 1px;
@@ -67,18 +96,19 @@ header #btns {
 }
 
 .catalog {
-    background-color: var(--dbg-bg-col);
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    align-items: stretch;
+    /* background-color: var(--dbg-bg-col); */
+    display: block;
+    float: left;
+
 }
 
 .catalogItem {
     background-color: var(--dbg-item-bg-col);
-    height: 180px;
     width: 180px;
-    flex-basis: auto;
-    display: inline-block;
+    height: 180px;
+    background-repeat: no-repeat;
+    background-position: center top;
+    float: left;
+    margin-right: 4px;
+    margin-bottom: 4px;
 }
