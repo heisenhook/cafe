@@ -39,7 +39,8 @@ header #btns {
     border-radius: 8px;
     display: flex;
     flex-direction: row;
-    padding: 0 64px 0 64px;
+    padding: 0 12% 0 12%;
+    column-gap: 8px;
 }
 
 .filters {
@@ -61,15 +62,23 @@ header #btns {
     padding-left: 8px;
 }
 
+.filterBox:hover {
+    background-color: #9273e7;
+}
+
 .catalog {
     background-color: var(--dbg-bg-col);
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    align-content: flex-start;
+    align-items: stretch;
 }
 
 .catalogItem {
     background-color: var(--dbg-item-bg-col);
     height: 180px;
     width: 180px;
+    flex-basis: auto;
+    display: inline-block;
 }
