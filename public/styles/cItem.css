@@ -1,5 +1,6 @@
 .cItem {
     background-color: var(--dbg-item-bg-col);
+    border-radius: 2px;
     width: 180px;
     height: 180px;
     background-repeat: no-repeat;
@@ -7,4 +8,9 @@
     float: left;
     margin-right: 4px;
     margin-bottom: 4px;
+
+    span {
+        font-weight: bold;
+        
+    }
 }
