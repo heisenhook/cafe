@@ -7,7 +7,6 @@
     </head>
     <body>
         <div id="wrapper">
-
             <header>
                 <span>cafe</span>
                 <div id="btns">
@@ -16,7 +15,6 @@
                     <button>3</button>
                 </div>
             </header>
-
             <div class="content">
                 <div class="filters">
                     <%- include('partials/fCategory') %>
@@ -25,6 +23,7 @@
                     <% for (var i = 0; i < items.length; i++) { %>
                         <%- include('partials/cItem', items[i]) %>
                     <% } %>
+                </div>
                 </div>
             </div>
 
