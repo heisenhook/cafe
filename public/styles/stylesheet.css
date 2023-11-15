@@ -21,10 +21,6 @@ header {
     padding: 12px 8px 12px 8px;
 }
 
-header span {
-
-}
-
 header #btns {
     justify-content: flex-end;
 }
@@ -52,63 +48,8 @@ header #btns {
     max-width: 240px;
 }
 
-.fCategory {
-    .fHeader {
-        h3 {
-            font-size: 9pt;
-            font-weight: bold;
-            margin: 0;
-            padding: 12px 12px 8px 12px;
-        }
-    }
-
-    ol {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-
-        .fOption:hover {
-            background-color: red;
-        }
-
-        li {
-           a {
-            display: flex;
-            padding: 12px 12px 12px 12px;
-           } 
-        }
-    }
-}
-
-.filterBox {
-    background-color: white;
-    border: cyan solid 1px;
-    border-radius: 4px;
-    font-weight: bold;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    padding-left: 8px;
-}
-
-.filterBox:hover {
-    background-color: #9273e7;
-}
-
 .catalog {
     /* background-color: var(--dbg-bg-col); */
     display: block;
     float: left;
-
-}
-
-.catalogItem {
-    background-color: var(--dbg-item-bg-col);
-    width: 180px;
-    height: 180px;
-    background-repeat: no-repeat;
-    background-position: center top;
-    float: left;
-    margin-right: 4px;
-    margin-bottom: 4px;
 }
