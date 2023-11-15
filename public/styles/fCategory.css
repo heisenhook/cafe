@@ -1,0 +1,27 @@
+.fCategory {
+    .fHeader {
+        h3 {
+            font-size: 9pt;
+            font-weight: bold;
+            margin: 0;
+            padding: 12px 12px 8px 12px;
+        }
+    }
+
+    ol {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        .fOption:hover {
+            background-color: red;
+        }
+
+        li {
+           a {
+            display: flex;
+            padding: 12px 12px 12px 12px;
+           } 
+        }
+    }
+}

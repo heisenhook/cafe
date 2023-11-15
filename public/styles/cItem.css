@@ -1,0 +1,10 @@
+.cItem {
+    background-color: var(--dbg-item-bg-col);
+    width: 180px;
+    height: 180px;
+    background-repeat: no-repeat;
+    background-position: center top;
+    float: left;
+    margin-right: 4px;
+    margin-bottom: 4px;
+}
