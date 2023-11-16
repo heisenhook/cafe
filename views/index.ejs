@@ -7,16 +7,16 @@
     </head>
     <body>
         <div class="wrapper">
-            <div class="wrappa">
-                <div class="header">
-                    <div class="name">
-                        <h1><%= title %></h1>
-                    </div>
-                    <div class="btns">
-                        
-                    </div>
+            <div class="header">
+                <div class="name">
+                    <h1>this and that this and that</h1>
                 </div>
-                <div class="content">
+                <div class="btns">
+                     
+                </div>
+            </div>
+            <div class="wrappa">
+                <div id="content" class="container">
                     <div class="filters">
                         <%- include('partials/fCategory') %>
                     </div>
@@ -25,6 +25,9 @@
                             <%- include('partials/cItem', items[i]) %>
                         <% } %>
                     </div>
+                </div>
+                <div id="cart" class="container">
+                    <h1>Cart</h1>
                 </div>
             </div>
         </div>
