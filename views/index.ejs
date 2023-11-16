@@ -6,27 +6,27 @@
         <script src="/js/script.js"></script>
     </head>
     <body>
-        <div id="wrapper">
-            <header>
-                <span>cafe</span>
-                <div id="btns">
-                    <button>1</button>
-                    <button>2</button>
-                    <button>3</button>
+        <div class="wrapper">
+            <div class="wrappa">
+                <div class="header">
+                    <div class="name">
+                        <h1><%= title %></h1>
+                    </div>
+                    <div class="btns">
+                        
+                    </div>
                 </div>
-            </header>
-            <div class="content">
-                <div class="filters">
-                    <%- include('partials/fCategory') %>
-                </div>
-                <div class="catalog">
-                    <% for (var i = 0; i < items.length; i++) { %>
-                        <%- include('partials/cItem', items[i]) %>
-                    <% } %>
-                </div>
+                <div class="content">
+                    <div class="filters">
+                        <%- include('partials/fCategory') %>
+                    </div>
+                    <div class="catalog">
+                        <% for (var i = 0; i < items.length; i++) { %>
+                            <%- include('partials/cItem', items[i]) %>
+                        <% } %>
+                    </div>
                 </div>
             </div>
-
         </div>
     </body>
 </html>
