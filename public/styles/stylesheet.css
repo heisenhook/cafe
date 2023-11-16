@@ -7,37 +7,47 @@
     --dbg-item-bg-col: #ff577b;
 }
 
-body {
-    background-color: var(--bg-col);
+body, html {
     margin: 0;
+    height: 100%;
 }
 
-header {
+.wrapper {
+    position: relative;
+    top: 10%;
+    transform: translateY(-10%);
+}
+
+.wrappa {
+    margin: 0 8% 0 8%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.header {
     background-color: var(--dbg-header-bg-col);
-    overflow: hidden;
     display: flex;
     justify-content: space-between;
+    overflow: hidden;
     align-items: center;
-    padding: 12px 8px 12px 8px;
+
 }
 
-header #btns {
+.name {
+
+    h1 {
+        margin: 0;
+    }
+}
+
+.btns {
     justify-content: flex-end;
-}
-
-#wrapper {
-    background-color: white;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin: 0 12% 0 12%;
 }
 
 .content {
     display: flex;
-    flex-direction: o;
-    padding: 12px 12px 12px 12px;
+    flex-direction: row;
     column-gap: 8px;
 }
 
@@ -52,7 +62,6 @@ header #btns {
 }
 
 .catalog {
-    /* background-color: var(--dbg-bg-col); */
     display: block;
     float: left;
 }
