@@ -14,7 +14,7 @@
         list-style: none;
 
         .fOption:hover {
-            background-color: red;
+            background-color: var(--bg-col);
         }
 
         li {

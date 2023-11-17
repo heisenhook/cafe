@@ -1,5 +1,5 @@
 .cItem {
-    background-color: var(--dbg-item-bg-col);
+    background-color: var(--bg-col);
     border-radius: 2px;
     width: 180px;
     height: 180px;
