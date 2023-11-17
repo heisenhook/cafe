@@ -1,20 +1,27 @@
 .fCategory {
     .fHeader {
         h3 {
-            font-size: 9pt;
-            font-weight: bold;
+            color: var(--txt-header-col);
+            font-size: 11pt;
             margin: 0;
-            padding: 12px 12px 8px 12px;
+            padding: 12px 12px 8px 8px;
         }
     }
 
     ol {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
         margin: 0;
         padding: 0;
         list-style: none;
 
-        .fOption:hover {
-            background-color: var(--bg-col);
+        .fOption {
+            border-radius: 4px;
+
+            :hover {
+                background-color: var(--bg-col);
+            }
         }
 
         li {
