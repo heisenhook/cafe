@@ -1,16 +1,35 @@
 .cItem {
     background-color: var(--bg-col);
+    border: 1px solid var(--brd-col);
     border-radius: 2px;
-    width: 180px;
-    height: 180px;
     background-repeat: no-repeat;
     background-position: center top;
     float: left;
+    width: 180px;
+    height: 180px;
     margin-right: 4px;
     margin-bottom: 4px;
 
+    display: flex;
+    flex-direction: column-reverse;
+
     span {
+        margin: 0;
+        margin-left: 4px;
+        color: var(--txt-header-col);
+        display: flex;
+        font-size: 9pt;
         font-weight: bold;
-        
+    }
+
+    h3 {
+        color: var(--txt-header-col);
+        margin: 0;
+        margin-left: 4px;
+        display: inline-block;
+        font-size: 21pt;
+        font-weight: bold;
+        transform:scale(1.4,1); /* W3C */
+        transform-origin: 0 0;
     }
 }
