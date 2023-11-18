@@ -1,0 +1,33 @@
+.cartItem {
+    height: 64px;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    row-gap: 4px;
+    border-bottom: 1px solid var(--brd-col);
+
+    .cartItemInfo {
+        display: flex;
+        gap: 8px;
+        justify-content: flex-start;
+        align-items: center;
+
+        img {
+            width: 64px;
+            height: 64px;
+            border-right: 1px solid var(--brd-col);
+        }
+    
+        span {
+            font-size: 15pt;
+        }
+    }
+
+    a {
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 8px;
+    }
+}
