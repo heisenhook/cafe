@@ -18,16 +18,16 @@
             <div class="wrappa">
                 <div id="content" class="container">
                     <div class="filters">
-                        <%- include('partials/fCategory') %>
+                        <%- include('partials/filterCategory') %>
                     </div>
                     <div class="catalog">
                         <% for (var i = 0; i < items.length; i++) { %>
-                            <%- include('partials/cItem', items[i]) %>
+                            <%- include('partials/catalogItem', items[i]) %>
                         <% } %>
                     </div>
                 </div>
                 <div id="cart" class="container">
-                    <h1>Cart</h1>
+                    <%- include('partials/cartItem') %>
                 </div>
             </div>
         </div>
