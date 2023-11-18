@@ -1,5 +1,5 @@
-.fCategory {
-    .fHeader {
+.filterCategory {
+    .filterHeader {
         h3 {
             color: var(--txt-header-col);
             font-size: 11pt;
@@ -16,7 +16,7 @@
         padding: 0;
         list-style: none;
 
-        .fOption {
+        .filterOption {
             border-radius: 4px;
 
             :hover {
