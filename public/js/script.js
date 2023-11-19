@@ -1,5 +1,5 @@
-const catalogItems = [];
-const cartItems = [];
+var catalogItems = [];
+var cartItems = [];
 
 function init() {
     catalogItems = document.getElementsByClassName('catalogItem');
