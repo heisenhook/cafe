@@ -2,7 +2,7 @@
     font-family: Arial, Helvetica, sans-serif;
     --bg-col: #F8F9FC;
     --bg-container-col: #ffffff;
-    --bg-open-col: #42e026;
+    --bg-open-col: #7fe66c;
     --bg-close-col: #ed0e0e;
     --brd-col: #E0E0E0;
     --txt-header-col: #222838;
@@ -38,33 +38,37 @@ body, html {
     display: flex;
     gap: 6px;
     overflow: hidden;
+    justify-content: space-between;
     align-items: center;
 
-    .status {
-        padding: 6px 12px 6px 12px;
-        border-radius: 4px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        
-        span {
-            font-weight: bold;
-            font-size: 12pt;
+    .name {
+        h1 {
+            color: var(--header-col);
+            font-size: 18pt;
+            margin: 0;
         }
     }
-}
 
-.name {
+    div {
+        justify-content: flex-end;
 
-    h1 {
-        color: var(--header-col);
-        font-size: 18pt;
-        margin: 0;
+        .btns {
+            
+        }
+
+        .status {
+            padding: 6px 12px 6px 12px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            
+            
+            span {
+                font-weight: bold;
+                font-size: 12pt;
+            }
+        }
     }
-}
-
-.btns {
-    justify-content: flex-end;
 }
 
 .container {
