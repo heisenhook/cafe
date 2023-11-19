@@ -1,4 +1,6 @@
 .filterCategory {
+    user-select: none;
+    
     .filterHeader {
         h3 {
             color: var(--txt-header-col);

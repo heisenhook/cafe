@@ -9,6 +9,7 @@
     height: 180px;
     margin-right: 4px;
     margin-bottom: 4px;
+    user-select: none;
     cursor: pointer;
 
     display: flex;
