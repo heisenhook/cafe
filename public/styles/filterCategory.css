@@ -19,6 +19,7 @@
         list-style: none;
 
         .filterOption {
+            cursor: pointer;
             border-radius: 4px;
 
             :hover {
