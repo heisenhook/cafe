@@ -9,9 +9,16 @@
 }
 
 body, html {
-    background-color: var(--bg-col);
     margin: 0;
     height: 100%;
+}
+
+body {
+    background-color: var(--bg-col);
+    /* background-image: url(/img/zlogo.png); */
+    background-repeat: no-repeat;
+    background-position: left, center;
+    background-size: 30%;
 }
 
 .wrapper {
