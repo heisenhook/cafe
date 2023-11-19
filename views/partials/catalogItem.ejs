@@ -1,10 +1,14 @@
-<link rel="stylesheet" href="styles/catalogItem.css"></link>
+<link rel="stylesheet" href="styles/catalogItem.css">
 
 <div class="catalogItem">
-    <img src="<%= catalogImageObj.imageData.url %>">
+    <img src="<%= (catalogImageObj && catalogImageObj.imageData && catalogImageObj.imageData.url) ? catalogImageObj.imageData.url : '/img/null.png' %>">
     
     <div class="itemInfo">
-        <h3><%= `$${(parseInt(catalogItemObj.itemData.variations[0].itemVariationData.priceMoney.amount.toString()) / 100).toFixed(2)}` %></h3>
-        <span><%= catalogItemObj.itemData.name %></span>
+        <h3>
+            <%= (catalogItemObj.itemData.variations[0].itemVariationData.priceMoney && catalogItemObj.itemData.variations[0].itemVariationData.priceMoney.amount !== null) ? `$${(parseInt(catalogItemObj.itemData.variations[0].itemVariationData.priceMoney.amount.toString()) / 100).toFixed(2)}` : 'null' %>
+        </h3>
+        <span>
+            <%= catalogItemObj.itemData.name %>
+        </span>
     </div>
 </div>
