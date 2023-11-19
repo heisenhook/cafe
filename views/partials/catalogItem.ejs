@@ -1,6 +1,10 @@
 <link rel="stylesheet" href="styles/catalogItem.css"></link>
 
 <div class="catalogItem">
-    <h3><%= `$${(parseInt(catalogItemObj.itemData.variations[0].itemVariationData.priceMoney.amount.toString()) / 100).toFixed(2)}` %></h3>
-    <span><%= catalogItemObj.itemData.name %></span>
+    <img src="<%= catalogImageObj.imageData.url %>">
+    
+    <div class="itemInfo">
+        <h3><%= `$${(parseInt(catalogItemObj.itemData.variations[0].itemVariationData.priceMoney.amount.toString()) / 100).toFixed(2)}` %></h3>
+        <span><%= catalogItemObj.itemData.name %></span>
+    </div>
 </div>
