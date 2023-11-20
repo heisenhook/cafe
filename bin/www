@@ -9,8 +9,18 @@ const server = app.listen(PORT, (err) => {
     if (err) log.error(err);
 });
 
+const io = require('socket.io')(server, {
+  cors: { origin: '*'}
+});
+
 server.on('error', onError);
 server.on('listening', onListening);
+
+io.on('connection', (socket) => {
+  // websocket stuff go here!!
+});
+
+io.listen(WEBHOOK_PORT, () => log.info(`socket listening @ ${HOST}:${WEBHOOK_PORT} `));
 
 function normalizePort(val) {
     const port = parseInt(val, 10);
