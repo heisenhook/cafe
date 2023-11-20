@@ -4,6 +4,7 @@ const log = require('../util/logger').createLogger('www');
 require('dotenv').config;
 const HOST = process.env.HOST || '127.0.0.1';
 const PORT = process.env.PORT || 3000;
+const WEBHOOK_PORT = process.env.WEBHOOK_PORT || 8080;
 
 const server = app.listen(PORT, (err) => {
     if (err) log.error(err);
