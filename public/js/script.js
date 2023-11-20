@@ -1,3 +1,5 @@
+const socket = io('ws://localhost:8080');
+
 var catalogItems = [];
 var cartItems = [];
 
