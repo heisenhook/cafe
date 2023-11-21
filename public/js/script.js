@@ -1,16 +1,28 @@
 const socket = io('ws://localhost:8080');
 
-var cartItems = [];
-var catalogItems = [];
-var catalogElements = [];
+var catalog = {
+    items : [],
+    elements : [],
 
-function insertCatalogItem(parameters) {
-    const htmlCode = `
+    insertItems : function() {
+        for (let i = 0; i < catalog.items.length; i++) {
+            catalog.insertItem({
+                stylesheetUrl: 'styles/catalogItem.css',
+                imageSrc: catalog.items[i].image ? catalog.items[i].image.imageData.url : '/img/null.png',
+                price: (catalog.items[i].item.itemData.variations[0].itemVariationData.priceMoney && catalog.items[i].item.itemData.variations[0].itemVariationData.priceMoney.amount !== null) ? `$${(parseInt(catalog.items[i].item.itemData.variations[0].itemVariationData.priceMoney.amount.toString()) / 100).toFixed(2)}` : 'null',
+                itemName: catalog.items[i].item.itemData.name,
+                targetElementId: 'catalog',
+            });
+        }
+    },
+
+    insertItem : function(parameters) {
+        const htmlCode = `
         <link rel="stylesheet" href="${parameters.stylesheetUrl}">
-
+    
         <div class="catalogItem">
             <img src="${parameters.imageSrc}">
-            
+                
             <div class="itemInfo">
                 <h3>
                     ${parameters.price}
@@ -20,43 +32,36 @@ function insertCatalogItem(parameters) {
                 </span>
             </div>
         </div>
-    `;
-
-    const targetElement = document.getElementById(parameters.targetElementId);
+        `;
     
-    if (targetElement) {
-        targetElement.innerHTML += htmlCode;
-    } else {
-        console.error('Target element not found');
-    }
+        const targetElement = document.getElementById(parameters.targetElementId);
+        
+        if (targetElement) {
+            targetElement.innerHTML += htmlCode;
+        } else {
+            console.error('Target element not found');
+        }
+    },
 }
 
-function insertCatalogItems() {
-    for (let i = 0; i < catalogItems.length; i++) {
-        insertCatalogItem({
-            stylesheetUrl: 'styles/catalogItem.css',
-            imageSrc: catalogItems[i].image ? catalogItems[i].image.imageData.url : '/img/null.png',
-            price: (catalogItems[i].item.itemData.variations[0].itemVariationData.priceMoney && catalogItems[i].item.itemData.variations[0].itemVariationData.priceMoney.amount !== null) ? `$${(parseInt(catalogItems[i].item.itemData.variations[0].itemVariationData.priceMoney.amount.toString()) / 100).toFixed(2)}` : 'null',
-            itemName: catalogItems[i].item.itemData.name,
-            targetElementId: 'catalog',
-        });
+var cart = {
+    items : [],
+    elements : [],
+    addToCart : function(id) {
+        cart.items.push(catalog.items[id]);
     }
-}
-
-function addToCart(id) {
-    cartItems.push(catalogItems[id]);
 }
 
 function init() {
     fetch('http://localhost:3000/api/catalog')
         .then(response => response.json())
         .then(data => {
-            catalogItems = data;
-            insertCatalogItems();
+            catalog.items = data;
+            catalog.insertItems();
 
-            catalogElements = document.getElementsByClassName('catalogItem');
-            for (let i = 0; i < catalogElements.length; i++) {
-                catalogElements[i].addEventListener('click', () => addToCart(i));
+            catalog.elements = document.getElementsByClassName('catalogItem');
+            for (let i = 0; i < catalog.elements.length; i++) {
+                catalog.elements[i].addEventListener('click', () => cart.addToCart(i));
             }
         })
         .catch(error => {
