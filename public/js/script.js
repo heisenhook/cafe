@@ -13,4 +13,8 @@ function init() {
     }
 }
 
+socket.on('connect', () => {
+    console.log('connected to websocket server');
+});
+
 window.addEventListener('load', (e) => { init(); });
