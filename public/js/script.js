@@ -47,27 +47,36 @@ var catalog = {
 var cart = {
     items : [],
     elements : [],
-    addToCart : function(id) {
-        cart.items.push(catalog.items[id]);
-        const targetElement = document.getElementById('cart');
 
+    updateCart : function() {
+        const targetElement = document.getElementById('cart');
         if (targetElement) {
-            cart.innerHTML = '';
+            targetElement.innerHTML = '';
             for (let i = 0; i < cart.items.length; i++) {
-                cart.innerHTML += `
+                const htmlCode = `
                 <link rel="stylesheet" href="/styles/cartItem.css">
+
                 <div class="cartItem">
+
                     <div class="cartItemInfo">
-                        <img src="${catalog.items[i].image ? catalog.items[i].image.imageData.url : '/img/null.png'}">
-                        <span>${catalog.items[i].item.itemData.name}</span>
+                        <img src="${cart.items[i].image ? cart.items[i].image.imageData.url : '/img/null.png'}">
+                        <span>${cart.items[i].item.itemData.name}</span>
                     </div>
                     <a>X</a>
+
                 </div>
-                `
+                `;
+                
+                targetElement.innerHTML += htmlCode;
             }
         } else {
             console.error('target element not found');
         }
+    },
+
+    addToCart : function(id) {
+        cart.items.push(catalog.items[id]);
+        cart.updateCart();
     }
 }
 
