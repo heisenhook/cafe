@@ -44,7 +44,7 @@ function insertCatalogItems() {
 }
 
 function addToCart(id) {
-    console.log(`clicked ${id}`)
+    cartItems.push(catalogItems[id]);
 }
 
 function init() {
