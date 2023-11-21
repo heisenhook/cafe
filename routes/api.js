@@ -13,13 +13,20 @@ router.get('/api/catalog/', async (req, res, next) => {
     try {
      const { result: { objects } } = await catalogApi.listCatalog(undefined, types);
  
-     res.json(objects);
+     const objectsStringified = objects.map(obj => {
+       if (typeof obj.version === 'bigint') {
+         obj.version = obj.version.toString();
+       }
+       return obj;
+     });
+ 
+     res.json(objectsStringified);
      
      } catch (err) {
         next(err);
      }
-    
-});
+ });
+ 
 
  router.get('/api/locations/', async (req, res, next) => {
      try {
