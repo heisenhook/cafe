@@ -27,26 +27,29 @@ router.get('/catalog/', async (req, res, next) => {
         const items = [];
 
         for (let i = 0; i < data.length; i++) {
-          const currentItem = data[i];
-        
-          if (currentItem.type === 'ITEM') {
+            const currentItem = data[i];
+
+            if (currentItem.type === 'ITEM') {
             const pair = {
-              item: currentItem,
-              image: null,
+                item: currentItem,
+                image: null,
             };
         
-            const imageId = currentItem.itemData.imageIds[0];
-            const matchingImage = data.find(item => item.type === 'IMAGE' && item.id === imageId);
-        
-            if (matchingImage) {
-              pair.image = matchingImage;
-            }
-        
-            items.push(pair);
-          }
-        }
+            if (currentItem.itemData && currentItem.itemData.imageIds && currentItem.itemData.imageIds.length > 0) {
+                const imageId = currentItem.itemData.imageIds[0];
+                const matchingImage = data.find(item => item.type === 'IMAGE' && item.id === imageId);
 
-        res.json(items);
+                if (matchingImage) {
+                    pair.image = matchingImage;
+                }
+            }
+            
+            items.push(pair);
+        }
+    }
+        
+    res.json(items);
+    
     } catch (err) {
         next(err);
     }
