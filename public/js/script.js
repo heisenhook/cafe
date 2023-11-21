@@ -42,6 +42,11 @@ function insertCatalogItems() {
         });
     }
 }
+
+function addToCart(id) {
+    console.log(`clicked ${id}`)
+}
+
 function init() {
     fetch('http://localhost:3000/api/catalog')
         .then(response => response.json())
@@ -51,9 +56,7 @@ function init() {
 
             catalogElements = document.getElementsByClassName('catalogItem');
             for (let i = 0; i < catalogElements.length; i++) {
-                catalogElements[i].addEventListener('click', (e) => {
-                    console.log('click');
-                });
+                catalogElements[i].addEventListener('click', () => addToCart(i));
             }
         })
         .catch(error => {
