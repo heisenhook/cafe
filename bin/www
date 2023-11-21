@@ -24,7 +24,8 @@ io.on('connection', (socket) => {
   socket.on('error', (err) => log.error(err));
 });
 
-io.listen(WEBHOOK_PORT, () => log.info(`socket listening @ ${HOST}:${WEBHOOK_PORT} `));
+// shouldn't be necassary
+// io.listen(WEBHOOK_PORT, () => log.info(`socket listening @ ${HOST}:${WEBHOOK_PORT} `));
 
 function normalizePort(val) {
     const port = parseInt(val, 10);
