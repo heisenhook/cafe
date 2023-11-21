@@ -23,11 +23,30 @@ router.get('/catalog/', async (req, res, next) => {
     const types = "ITEM,IMAGE";
     try {
         const { result: { objects } } = await catalogApi.listCatalog(undefined, types);
-   
-        const objectsStringified = objects.map(obj => convertBigIntToString(obj));
-   
-        res.json(objectsStringified);
-       
+        const data = objects.map(obj => convertBigIntToString(obj));
+        const items = [];
+
+        for (let i = 0; i < data.length; i++) {
+          const currentItem = data[i];
+        
+          if (currentItem.type === 'ITEM') {
+            const pair = {
+              item: currentItem,
+              image: null,
+            };
+        
+            const imageId = currentItem.itemData.imageIds[0];
+            const matchingImage = data.find(item => item.type === 'IMAGE' && item.id === imageId);
+        
+            if (matchingImage) {
+              pair.image = matchingImage;
+            }
+        
+            items.push(pair);
+          }
+        }
+
+        res.json(items);
     } catch (err) {
         next(err);
     }
