@@ -8,7 +8,7 @@ const {
 
 const router = express.Router();
 
-router.get('/api/catalog/', async (req, res, next) => {
+router.get('/catalog/', async (req, res, next) => {
     const types = "ITEM,IMAGE";
     try {
      const { result: { objects } } = await catalogApi.listCatalog(undefined, types);
@@ -26,9 +26,8 @@ router.get('/api/catalog/', async (req, res, next) => {
         next(err);
      }
  });
- 
 
- router.get('/api/locations/', async (req, res, next) => {
+ router.get('/locations/', async (req, res, next) => {
      try {
       const { result: { locations } } = await locationsApi.listLocations();
  
