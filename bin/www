@@ -18,7 +18,10 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 io.on('connection', (socket) => {
-  // websocket stuff go here!!
+  log.info(`client connected: ${socket.id}`);
+
+  socket.on('disconnect', () => log.info(`client disconnect: ${socket.id}`))
+  socket.on('error', (err) => log.error(err));
 });
 
 io.listen(WEBHOOK_PORT, () => log.info(`socket listening @ ${HOST}:${WEBHOOK_PORT} `));
