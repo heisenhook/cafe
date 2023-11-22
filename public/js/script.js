@@ -1,4 +1,4 @@
-const socket = io('ws://localhost:8080');
+// const socket = io('ws://localhost:8080');
 
 var catalog = {
     items : [],
@@ -98,9 +98,9 @@ function init() {
 }
 
 
-socket.on('connect', () => {
-    console.log('connected to websocket server');
-});
+// socket.on('connect', () => {
+//     console.log('connected to websocket server');
+// });
 
 window.addEventListener('load', (e) => {
     init();
