@@ -1,6 +1,14 @@
 var square = [];
 var catalog = [];
 var cart = {
+    total : 0.00,
+    items : [
+
+    ],
+
+    add : function(id) {
+        console.log(id);
+    },
 
 };
 
@@ -40,6 +48,10 @@ function buildCatalog() {
             </div>
             `;
         }
+    }
+
+    for (let i = 0; i < document.getElementsByClassName('catalogItem').length; i++) {
+        document.getElementsByClassName('catalogItem')[i].addEventListener('click', () => cart.add(i));
     }
 }
 
