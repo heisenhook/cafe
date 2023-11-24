@@ -20,6 +20,44 @@ var cart = {
 
 };
 
+function buildCart() {
+    for (let i = 0; i < cart.items.length; i++) {
+        console.log(`i ${i}`)
+        for (let j = 0; j < square.length; j++) {
+            console.log(`j ${j}`)
+            if (square[j].type === "ITEM" && square[j].id == cart.items[i].id) {
+                console.log(`true`)
+                let img = '/img/null.png';
+
+                // maybe make this a function rather than reusing it
+                if (square[j].itemData.imageIds) {
+                    for (let j = 0; j < square.length; j++) {
+                        if (square[j].type === "IMAGE" && (square[j].id == square[i].itemData.imageIds[0])) {
+                            img = square[j].imageData.url;
+                        }
+                    }
+                }
+                
+                let name = square[j].itemData.name;
+                
+                document.getElementById('cart').innerHTML += `
+                <link rel="stylesheet" href="/styles/cartItem.css">
+
+                <div class="cartItem">
+
+                    <div class="cartItemInfo">
+                        <img src="${img}">
+                        <span>${name}</span>
+                    </div>
+                    <a>X</a>
+
+                </div>
+                `;
+            }
+        }
+    }
+}
+
 function buildCatalog() {
     for (let i = 0; i < square.length; i++) {
         if (square[i].type == "ITEM") {
