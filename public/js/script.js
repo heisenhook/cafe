@@ -7,7 +7,15 @@ var cart = {
     ],
 
     add : function(id) {
-        console.log(id);
+        for (let i = 0; i < square.length; i++) {
+            if (square[i].type === "ITEM" && square[i].id == catalog[id]) {
+                this.items.push({
+                    id : square[i].id,
+                    price : square[i].itemData.variations[0].itemVariationData.priceMoney.amount,
+                    modifiers : square[i].itemData.modifierListInfo
+                });
+            }
+        }
     },
 
 };
