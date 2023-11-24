@@ -16,6 +16,8 @@ var cart = {
                 });
             }
         }
+
+        buildCart();
     },
 
 };
