@@ -22,81 +22,83 @@ var cart = {
 
 };
 
+function getImageUrl(item) {
+    let img = '/img/null.png';
+
+    if (item.itemData.imageIds) {
+        for (let i = 0; i < square.length; i++) {
+            if (square[i].type === "IMAGE" && square[i].id === item.itemData.imageIds[0]) {
+                img = square[i].imageData.url;
+                break; // exit the loop once the image is found
+            }
+        }
+    }
+
+    return img;
+}
+
+function buildCatalogItem(item) {
+    let img = getImageUrl(item);
+
+    let price = (item.itemData.variations[0].itemVariationData.priceMoney && item.itemData.variations[0].itemVariationData.priceMoney.amount !== null) ?
+        `$${(parseInt(item.itemData.variations[0].itemVariationData.priceMoney.amount.toString()) / 100).toFixed(2)}` :
+        'null';
+
+    let name = item.itemData.name;
+
+    return `
+        <link rel="stylesheet" href="styles/catalogItem.css">
+    
+        <div class="catalogItem">
+            <img src="${img}">
+                
+            <div class="itemInfo">
+                <h3>${price}</h3>
+                <span>${name}</span>
+            </div>
+        </div>
+    `;
+}
+
+function buildCatalog() {
+    for (let i = 0; i < square.length; i++) {
+        if (square[i].type === "ITEM") {
+            catalog.push(square[i].id);
+            document.getElementById('catalog').innerHTML += buildCatalogItem(square[i]);
+        }
+    }
+
+    for (let i = 0; i < document.getElementsByClassName('catalogItem').length; i++) {
+        document.getElementsByClassName('catalogItem')[i].addEventListener('click', () => cart.add(i));
+    }
+}
+
+function buildCartItem(item) {
+    let img = getImageUrl(item);
+
+    let name = item.itemData.name;
+
+    return `
+        <link rel="stylesheet" href="/styles/cartItem.css">
+        <div class="cartItem">
+            <div class="cartItemInfo">
+                <img src="${img}">
+                <span>${name}</span>
+            </div>
+            <a>X</a>
+        </div>
+    `;
+}
+
 function buildCart() {
     document.getElementById('cart').innerHTML = '';
 
     for (let i = 0; i < cart.items.length; i++) {
         for (let j = 0; j < square.length; j++) {
             if (square[j].type === "ITEM" && square[j].id === cart.items[i].id) {
-                let img = '/img/null.png';
-
-                if (square[j].itemData.imageIds) {
-                    for (let k = 0; k < square.length; k++) {
-                        if (square[k].type === "IMAGE" && square[k].id === square[j].itemData.imageIds[0]) {
-                            img = square[k].imageData.url;
-                            break; // exit the loop once the image is found
-                        }
-                    }
-                }
-
-                let name = square[j].itemData.name;
-
-                document.getElementById('cart').innerHTML += `
-                <link rel="stylesheet" href="/styles/cartItem.css">
-
-                <div class="cartItem">
-                    <div class="cartItemInfo">
-                        <img src="${img}">
-                        <span>${name}</span>
-                    </div>
-                    <a>X</a>
-                </div>
-                `;
+                document.getElementById('cart').innerHTML += buildCartItem(square[j]);
             }
         }
-    }
-}
-
-function buildCatalog() {
-    for (let i = 0; i < square.length; i++) {
-        if (square[i].type == "ITEM") {
-            catalog.push(square[i].id)
-            let img = '/img/null.png';
-
-            if (square[i].itemData.imageIds) {
-                for (let j = 0; j < square.length; j++) {
-                    // this does not account for items with multiple images, too bad!
-                    if (square[j].type === "IMAGE" && (square[j].id == square[i].itemData.imageIds[0])) {
-                        img = square[j].imageData.url;
-                    }
-                }
-            }
-
-            // doesn't account for items with variable pricing, i don't think i'll be debating my barista on the price of my coffee anyways
-            let price = (square[i].itemData.variations[0].itemVariationData.priceMoney && square[i].itemData.variations[0].itemVariationData.priceMoney.amount !== null) ? `$${(parseInt(square[i].itemData.variations[0].itemVariationData.priceMoney.amount.toString()) / 100).toFixed(2)}` : 'null';
-            let name = square[i].itemData.name;
-
-            document.getElementById('catalog').innerHTML += `
-            <link rel="stylesheet" href="styles/catalogItem.css">
-        
-            <div class="catalogItem">
-                <img src="${img}">
-                    
-                <div class="itemInfo">
-                    <h3>
-                        ${price}
-                    </h3>
-                    <span>
-                        ${name}
-                    </span>
-                </div>
-            </div>
-            `;
-        }
-    }
-
-    for (let i = 0; i < document.getElementsByClassName('catalogItem').length; i++) {
-        document.getElementsByClassName('catalogItem')[i].addEventListener('click', () => cart.add(i));
     }
 }
 
