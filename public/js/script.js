@@ -23,34 +23,33 @@ var cart = {
 };
 
 function buildCart() {
+    document.getElementById('cart').innerHTML = '';
+
     for (let i = 0; i < cart.items.length; i++) {
         for (let j = 0; j < square.length; j++) {
-            if (square[j].type === "ITEM" && square[j].id == cart.items[i].id) {
+            if (square[j].type === "ITEM" && square[j].id === cart.items[i].id) {
                 let img = '/img/null.png';
 
-                // maybe make this a function rather than reusing it
                 if (square[j].itemData.imageIds) {
-                    for (let j = 0; j < square.length; j++) {
-                        if (square[j].type === "IMAGE" && (square[j].id == square[i].itemData.imageIds[0])) {
-                            img = square[j].imageData.url;
+                    for (let k = 0; k < square.length; k++) {
+                        if (square[k].type === "IMAGE" && square[k].id === square[j].itemData.imageIds[0]) {
+                            img = square[k].imageData.url;
+                            break; // exit the loop once the image is found
                         }
                     }
                 }
-                
+
                 let name = square[j].itemData.name;
 
-                document.getElementById('cart').innerHTML = '';
                 document.getElementById('cart').innerHTML += `
                 <link rel="stylesheet" href="/styles/cartItem.css">
 
                 <div class="cartItem">
-
                     <div class="cartItemInfo">
                         <img src="${img}">
                         <span>${name}</span>
                     </div>
                     <a>X</a>
-
                 </div>
                 `;
             }
