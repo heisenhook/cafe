@@ -37,6 +37,16 @@ function getImageUrl(item) {
     return img;
 }
 
+function calculateCartTotal() {
+    let total = 0.00;
+
+    for (let i = 0; i < cart.items.length; i++) {
+        total += parseInt(cart.items[i].price);
+    }
+
+    return total;
+}
+
 function buildCatalogItem(item) {
     let img = getImageUrl(item);
 
@@ -100,7 +110,10 @@ function buildCart() {
             }
         }
     }
+
+    cart.total = calculateCartTotal();
 }
+
 
 function init() {
     fetch('http://localhost:3000/api/catalog')
