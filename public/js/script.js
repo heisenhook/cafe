@@ -17,7 +17,7 @@ var cart = {
             }
         }
 
-        buildCart();
+        buildCart(id);
     },
 
 };
@@ -95,25 +95,35 @@ function buildCartItem(item) {
                 <img src="${img}">
                 <span>${name}</span>
             </div>
-            <a>X</a>
         </div>
     `;
 }
 
-function buildCart() {
-    document.getElementById('cart').innerHTML = '';
-
-    for (let i = 0; i < cart.items.length; i++) {
-        for (let j = 0; j < square.length; j++) {
-            if (square[j].type === "ITEM" && square[j].id === cart.items[i].id) {
-                document.getElementById('cart').innerHTML += buildCartItem(square[j]);
-            }
-        }
-    }
-
-    cart.total = calculateCartTotal();
+function modifyCartItem(id) {
+    console.log(id);
 }
 
+function buildCart(id = -1) {
+    if (id < 0) {
+        document.getElementById('cart').innerHTML = '';
+
+        for (let i = 0; i < cart.items.length; i++) {
+            for (let j = 0; j < square.length; j++) {
+                if (square[j].type === "ITEM" && square[j].id === cart.items[i].id) {
+                    document.getElementById('cart').innerHTML += buildCartItem(square[j]);
+                }
+            }
+        }
+    
+        for (let i = 0; i < document.getElementsByClassName('cartItem').length; i++) {
+            document.getElementsByClassName('cartItem')[i].addEventListener('click', () => modifyCartItem(i));
+        }
+    
+        cart.total = calculateCartTotal();
+    }
+
+    
+}
 
 function init() {
     fetch('http://localhost:3000/api/catalog')
