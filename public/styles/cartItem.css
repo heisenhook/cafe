@@ -7,8 +7,10 @@
     justify-content: space-between;
     row-gap: 4px;
     border-bottom: 1px solid var(--brd-col);
+    cursor: pointer;
 
     .cartItemInfo {
+        user-select: none;
         display: flex;
         gap: 8px;
         justify-content: flex-start;
@@ -26,7 +28,6 @@
     }
 
     a {
-        cursor: pointer;
         display: flex;
         justify-content: flex-end;
         margin-right: 8px;

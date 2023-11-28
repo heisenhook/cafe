@@ -1,106 +1,141 @@
-// const socket = io('ws://localhost:8080');
+var square = [];
+var catalog = [];
+var cart = {
+    total : 0.00,
+    items : [
 
-var catalog = {
-    items : [],
-    elements : [],
+    ],
 
-    insertItems : function() {
-        for (let i = 0; i < catalog.items.length; i++) {
-            catalog.insertItem({
-                stylesheetUrl: 'styles/catalogItem.css',
-                imageSrc: catalog.items[i].image ? catalog.items[i].image.imageData.url : '/img/null.png',
-                price: (catalog.items[i].item.itemData.variations[0].itemVariationData.priceMoney && catalog.items[i].item.itemData.variations[0].itemVariationData.priceMoney.amount !== null) ? `$${(parseInt(catalog.items[i].item.itemData.variations[0].itemVariationData.priceMoney.amount.toString()) / 100).toFixed(2)}` : 'null',
-                itemName: catalog.items[i].item.itemData.name,
-                targetElementId: 'catalog',
-            });
+    add : function(id) {
+        for (let i = 0; i < square.length; i++) {
+            if (square[i].type === "ITEM" && square[i].id == catalog[id]) {
+                this.items.push({
+                    id : square[i].id,
+                    price : square[i].itemData.variations[0].itemVariationData.priceMoney.amount,
+                    modifiers : square[i].itemData.modifierListInfo
+                });
+            }
         }
+
+        buildCart(id);
     },
 
-    insertItem : function(parameters) {
-        const htmlCode = `
-        <link rel="stylesheet" href="${parameters.stylesheetUrl}">
-    
-        <div class="catalogItem">
-            <img src="${parameters.imageSrc}">
-                
-            <div class="itemInfo">
-                <h3>
-                    ${parameters.price}
-                </h3>
-                <span>
-                    ${parameters.itemName}
-                </span>
-            </div>
-        </div>
-        `;
-    
-        const targetElement = document.getElementById(parameters.targetElementId);
-        
-        if (targetElement) {
-            targetElement.innerHTML += htmlCode;
-        } else {
-            console.error('Target element not found');
+};
+
+function getImageUrl(item) {
+    let img = '/img/null.png';
+
+    if (item.itemData.imageIds) {
+        for (let i = 0; i < square.length; i++) {
+            if (square[i].type === "IMAGE" && square[i].id === item.itemData.imageIds[0]) {
+                img = square[i].imageData.url;
+                break; // exit the loop once the image is found
+            }
         }
-    },
+    }
+
+    return img;
 }
 
-var cart = {
-    items : [],
-    elements : [],
+function calculateCartTotal() {
+    let total = 0.00;
 
-    updateCart : function() {
-        const targetElement = document.getElementById('cart');
-        if (targetElement) {
-            targetElement.innerHTML = '';
-            for (let i = 0; i < cart.items.length; i++) {
-                const htmlCode = `
-                <link rel="stylesheet" href="/styles/cartItem.css">
+    for (let i = 0; i < cart.items.length; i++) {
+        total += parseInt(cart.items[i].price);
+    }
 
-                <div class="cartItem">
+    return total;
+}
 
-                    <div class="cartItemInfo">
-                        <img src="${cart.items[i].image ? cart.items[i].image.imageData.url : '/img/null.png'}">
-                        <span>${cart.items[i].item.itemData.name}</span>
-                    </div>
-                    <a>X</a>
+function buildCatalogItem(item) {
+    let img = getImageUrl(item);
 
-                </div>
-                `;
+    let price = (item.itemData.variations[0].itemVariationData.priceMoney && item.itemData.variations[0].itemVariationData.priceMoney.amount !== null) ?
+        `$${(parseInt(item.itemData.variations[0].itemVariationData.priceMoney.amount.toString()) / 100).toFixed(2)}` :
+        'null';
+
+    let name = item.itemData.name;
+
+    return `
+        <link rel="stylesheet" href="styles/catalogItem.css">
+    
+        <div class="catalogItem">
+            <img src="${img}">
                 
-                targetElement.innerHTML += htmlCode;
-            }
-        } else {
-            console.error('target element not found');
-        }
-    },
+            <div class="itemInfo">
+                <h3>${price}</h3>
+                <span>${name}</span>
+            </div>
+        </div>
+    `;
+}
 
-    addToCart : function(id) {
-        cart.items.push(catalog.items[id]);
-        cart.updateCart();
+function buildCatalog() {
+    for (let i = 0; i < square.length; i++) {
+        if (square[i].type === "ITEM") {
+            catalog.push(square[i].id);
+            document.getElementById('catalog').innerHTML += buildCatalogItem(square[i]);
+        }
+    }
+
+    for (let i = 0; i < document.getElementsByClassName('catalogItem').length; i++) {
+        document.getElementsByClassName('catalogItem')[i].addEventListener('click', () => cart.add(i));
     }
 }
 
+function buildCartItem(item) {
+    let img = getImageUrl(item);
+
+    let name = item.itemData.name;
+
+    return `
+        <link rel="stylesheet" href="/styles/cartItem.css">
+        <div class="cartItem">
+            <div class="cartItemInfo">
+                <img src="${img}">
+                <span>${name}</span>
+            </div>
+        </div>
+    `;
+}
+
+function modifyCartItem(id) {
+    console.log(id);
+}
+
+function buildCart(id = -1) {
+    if (id < 0) {
+        document.getElementById('cart').innerHTML = '';
+
+        for (let i = 0; i < cart.items.length; i++) {
+            for (let j = 0; j < square.length; j++) {
+                if (square[j].type === "ITEM" && square[j].id === cart.items[i].id) {
+                    document.getElementById('cart').innerHTML += buildCartItem(square[j]);
+                }
+            }
+        }
+    
+        for (let i = 0; i < document.getElementsByClassName('cartItem').length; i++) {
+            document.getElementsByClassName('cartItem')[i].addEventListener('click', () => modifyCartItem(i));
+        }
+    
+        cart.total = calculateCartTotal();
+    }
+
+    
+}
+
 function init() {
-    fetch('http://localhost:3000/api/catalog')
+    fetch(`${window.location.protocol}//${window.location.host}/api/catalog`)
         .then(response => response.json())
         .then(data => {
-            catalog.items = data;
-            catalog.insertItems();
-
-            catalog.elements = document.getElementsByClassName('catalogItem');
-            for (let i = 0; i < catalog.elements.length; i++) {
-                catalog.elements[i].addEventListener('click', () => cart.addToCart(i));
-            }
+            square = data;
+            buildCatalog();
         })
         .catch(error => {
             console.error('failed to fetch catalog items: ', error);
         });
 }
-
-
-// socket.on('connect', () => {
-//     console.log('connected to websocket server');
-// });
 
 window.addEventListener('load', (e) => {
     init();
