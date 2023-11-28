@@ -6,6 +6,7 @@
     --bg-close-col: #ed0e0e;
     --brd-col: #E0E0E0;
     --txt-header-col: #222838;
+    --checkout-btn-col: #7174ff;
 }
 
 body, html {
@@ -99,6 +100,7 @@ body {
     padding: 0;
     width: 340px;
     flex: 0 0 340px;
+    justify-content: space-between;
 
     h1 {
         margin: 0;
@@ -153,5 +155,75 @@ body {
     .price {
         margin: 0;
         padding: 0;
+    }
+}
+
+.modifiers {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 6px 10px 6px 10px;
+
+    .slider {
+        display: flex;
+        flex-direction: column;
+        column-gap: 4px;
+
+        h3 {
+            font-size: 9pt;
+            margin: 0;
+            padding: 0;
+        }
+
+        .bar {
+            display: flex;
+            flex-direction: row;
+            row-gap: 4px;
+
+            .value {
+                width: 100%;
+                margin: 2px 6px 2px 6px;
+            }
+
+            .value::-webkit-slider-thumb {
+                width: 4px;
+                height: 4px;
+                cursor: pointer;
+            }
+
+            h4 {
+                font-size: 8pt;
+                margin: 0;
+                padding: 0;
+                align-self: center;
+                user-select: none;
+            }
+
+        }
+    }
+
+}
+
+.checkoutContainer {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 10px;
+    margin-top: auto;
+    
+    button {
+        cursor: pointer;
+        background-color: var(--checkout-btn-col);
+        border: none;
+        border-radius: 4px;
+        display: block;
+        margin: auto;
+        padding: 0;
+        height: 48px;
+        width: 94%;
+        box-shadow: 1px 1px 1px 1px #00000038;
+        font-family: arial;
+        font-weight: bold;
+        font-size: 16pt;
+        color: rgb(0, 0, 0);
     }
 }
