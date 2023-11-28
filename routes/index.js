@@ -1,4 +1,5 @@
 const express = require('express');
+const mobile = require('is-mobile');
 const { v4: uuidv4 } = require('uuid');
 const { 
     catalogApi,
