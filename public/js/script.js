@@ -126,7 +126,7 @@ function buildCart(id = -1) {
 }
 
 function init() {
-    fetch(`${window.location.protocol}//${window.location.host}/api/catalog`)
+    fetch(`${window.location}/api/catalog`)
         .then(response => response.json())
         .then(data => {
             square = data;
