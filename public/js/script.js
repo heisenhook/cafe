@@ -1,3 +1,4 @@
+const socket = io('ws://localhost:8080');
 var square = [];
 var catalog = [];
 var cart = {
@@ -136,6 +137,10 @@ function init() {
             console.error('failed to fetch catalog items: ', error);
         });
 }
+
+socket.on('connect', () => {
+    console.log('connected 2 websocket server');
+});
 
 window.addEventListener('load', (e) => {
     init();
