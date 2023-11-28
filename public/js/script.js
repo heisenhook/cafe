@@ -1,6 +1,6 @@
 let hostname = 'localhost';
 if (window.location.hostname == 'learncpp.today') {
-    hostname == 'demo.learncpp.today';
+    hostname == '66.94.112.161';
 } // can't think of any better solution, this might not even work!
 
 const socket = io(`ws://${hostname}:8080`);
