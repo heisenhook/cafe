@@ -1,4 +1,4 @@
-const socket = io('ws://localhost:8080');
+const socket = io(`ws://${window.location.hostname}:8080`);
 var square = [];
 var catalog = [];
 var cart = {
