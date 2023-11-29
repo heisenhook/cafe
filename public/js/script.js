@@ -1,8 +1,8 @@
-let hostname = 'localhost';
-if (window.location.hostname == 'learncpp.today') {
-    hostname == '66.94.112.161';
-} // can't think of any better solution, this might not even work!
-const socket = io.connect(`ws://${hostname}:8080`);
+// let hostname = 'localhost';
+// if (window.location.hostname == 'learncpp.today') {
+//     hostname == '66.94.112.161';
+// } // can't think of any better solution, this might not even work!
+// const socket = io.connect(`ws://${hostname}:8080`);
 var square = [];
 var catalog = [];
 var cart = {
@@ -12,25 +12,34 @@ var cart = {
     ],
 
     add : function(id) {
-        for (let i = 0; i < square.length; i++) {
+        for (let i = 0; i < square.length; i++) { // loop until id is matched with catalogItem id
             if (square[i].type === "ITEM" && square[i].id == catalog[id]) {
-                this.items.push({
+                this.items.push({ // push square id, price & modifier data to obj
                     id : square[i].id,
                     price : square[i].itemData.variations[0].itemVariationData.priceMoney.amount,
                     modifiers : square[i].itemData.modifierListInfo
                 });
+
+                buildCart(square[i].id); // pass the square id of added item to buildCart(), prompting modifications to item
             }
         }
-
-        buildCart(id);
     },
 
 };
 
+function getItemIndice(id) {
+    for (let i = 0; i < square.length; i++) { //
+        if (square[i].type === "ITEM" && square[i].id == id) {
+            return i;
+        }
+    }
+}
+
 function getImageUrl(item) {
     let img = '/img/null.png';
 
-    if (item.itemData.imageIds) {
+    // Check if item.itemData is defined before accessing its properties
+    if (item.itemData && item.itemData.imageIds) {
         for (let i = 0; i < square.length; i++) {
             if (square[i].type === "IMAGE" && square[i].id === item.itemData.imageIds[0]) {
                 img = square[i].imageData.url;
@@ -41,6 +50,7 @@ function getImageUrl(item) {
 
     return img;
 }
+
 
 function calculateCartTotal() {
     let total = 0.00;
@@ -108,10 +118,10 @@ function modifyCartItem(id) {
     console.log(id);
 }
 
-function buildCart(id = -1) {
-    if (id < 0) {
-        document.getElementById('cart').innerHTML = '';
+function buildCart(id = null) {
+    document.getElementById('cart').innerHTML = '';
 
+    if (id === null) { // if no square id was passed, then render all items in list format
         for (let i = 0; i < cart.items.length; i++) {
             for (let j = 0; j < square.length; j++) {
                 if (square[j].type === "ITEM" && square[j].id === cart.items[i].id) {
@@ -125,8 +135,51 @@ function buildCart(id = -1) {
         }
     
         cart.total = calculateCartTotal();
+        return;
     }
 
+    // if a square id was passed, render individual item w/ modification options
+    let item = getItemIndice(id);
+
+    if (item !== null && square[item].itemData.variations && square[item].itemData.variations.length > 0) {
+        let name = square[item].itemData.name;
+        
+        // Check if variations[0] is defined before accessing its properties
+        if (square[item].itemData.variations[0]) {
+            let price = square[item].itemData.variations[0].itemVariationData.priceMoney.amount;
+            let img = getImageUrl(item);
+    
+            let html = `
+                <div class="modifyInfo">
+                    <img class="modifyImage" src="${img}">
+                    <div class="modifyText">
+                        <h3 class="name">${name}</h3>
+                        <h3 class="price">${price}</h3>
+                    </div>
+                </div>
+                <div class="modifiers">
+                    <div class="slider">
+                        <h3>modifier name</h3>
+                        <div class="bar">
+                            <h4>0</h4>
+                            <input type="range" min="0" max="5" value="0" class="value">
+                            <h4>5</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="checkoutContainer">
+                    <button>Save Item</button>
+                </div>
+            `;
+
+            document.getElementById('cart').innerHTML = html;
+        } else {
+            console.error(`Variation for item with id ${id} is undefined or empty.`);
+        }
+    } else {
+        console.error(`Unable to build cart item for id: ${id}`);
+    }
+    
     
 }
 
@@ -142,9 +195,9 @@ function init() {
         });
 }
 
-socket.on('connect', () => {
-    console.log('connected 2 websocket server');
-});
+// socket.on('connect', () => {
+//     console.log('connected 2 websocket server');
+// });
 
 window.addEventListener('load', (e) => {
     init();
