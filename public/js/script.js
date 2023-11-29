@@ -2,6 +2,7 @@ let hostname = 'localhost';
 if (window.location.hostname == 'learncpp.today') {
     hostname == '66.94.112.161';
 } // can't think of any better solution, this might not even work!
+const socket = io(`ws://demo.learncpp.today`);
 var square = [];
 var catalog = [];
 var cart = {
