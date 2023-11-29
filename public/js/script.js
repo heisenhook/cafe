@@ -75,7 +75,7 @@ function buildCatalogItem(item) {
         <link rel="stylesheet" href="styles/catalogItem.css">
     
         <div class="catalogItem">
-            <img src="${img}">
+            <img class="catalogImage" src="${img}">
                 
             <div class="itemInfo">
                 <h3>${price}</h3>
