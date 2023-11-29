@@ -168,7 +168,7 @@ function buildCart(id = null) {
                     </div>
                 </div>
                 <div class="checkoutContainer">
-                    <button> class="checkoutButton" >Save Item</button>
+                    <button class="checkoutButton" >Save Item</button>
                 </div>
             `;
 
