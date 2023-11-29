@@ -159,8 +159,8 @@ function buildCart(id = null) {
                 </div>
                 <div class="modifiers">
                     <div class="slider">
-                        <h3>modifier name</h3>
-                        <div class="bar">
+                        <h3 class="modifierName" >modifier name</h3>
+                        <div class="bar" >
                             <h4 class="range" >0</h4>
                             <input type="range" min="0" max="5" value="0" class="value">
                             <h4 class="range" >5</h4>

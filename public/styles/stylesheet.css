@@ -169,7 +169,7 @@ body {
         flex-direction: column;
         column-gap: 4px;
 
-        h3 {
+        .modifierName {
             font-size: 9pt;
             margin: 0;
             padding: 0;
