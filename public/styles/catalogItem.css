@@ -22,7 +22,7 @@
         display: flex;
         flex-direction: column-reverse;
 
-        span {
+        .itemName {
             margin: 0;
             margin-left: 4px;
             color: var(--txt-header-col);
@@ -33,7 +33,7 @@
             transform-origin: 0 0;
         }
     
-        h3 {
+        .itemPrice {
             color: var(--txt-header-col);
             margin: 0;
             margin-left: 4px;

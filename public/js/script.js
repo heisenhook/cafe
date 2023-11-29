@@ -78,8 +78,8 @@ function buildCatalogItem(item) {
             <img class="catalogImage" src="${img}">
                 
             <div class="itemInfo">
-                <h3>${price}</h3>
-                <span>${name}</span>
+                <h3 class="itemPrice" >${price}</h3>
+                <span class="itemName" >${name}</span>
             </div>
         </div>
     `;
@@ -107,8 +107,8 @@ function buildCartItem(item) {
         <link rel="stylesheet" href="/styles/cartItem.css">
         <div class="cartItem">
             <div class="cartItemInfo">
-                <img src="${img}">
-                <span>${name}</span>
+                <img class="cartItemImage" src="${img}">
+                <span class="cartItemName" >${name}</span>
             </div>
         </div>
     `;
@@ -161,14 +161,14 @@ function buildCart(id = null) {
                     <div class="slider">
                         <h3>modifier name</h3>
                         <div class="bar">
-                            <h4>0</h4>
+                            <h4 class="range" >0</h4>
                             <input type="range" min="0" max="5" value="0" class="value">
-                            <h4>5</h4>
+                            <h4 class="range" >5</h4>
                         </div>
                     </div>
                 </div>
                 <div class="checkoutContainer">
-                    <button>Save Item</button>
+                    <button> class="checkoutButton" Save Item</button>
                 </div>
             `;
 

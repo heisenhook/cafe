@@ -16,18 +16,18 @@
         justify-content: flex-start;
         align-items: center;
 
-        img {
+        .cartItemImage {
             width: 64px;
             height: 64px;
             border-right: 1px solid var(--brd-col);
         }
     
-        span {
+        .cartItemName {
             font-size: 15pt;
         }
     }
 
-    a {
+    .a {
         display: flex;
         justify-content: flex-end;
         margin-right: 8px;
