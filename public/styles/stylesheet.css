@@ -55,14 +55,14 @@ body {
     z-index: 1;
 
     .name {
-        h1 {
+        .headerText {
             color: var(--header-col);
             font-size: 18pt;
             margin: 0;
         }
     }
 
-    div {
+    .alignRight {
         justify-content: flex-end;
 
         .status {

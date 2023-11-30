@@ -2,7 +2,7 @@
     user-select: none;
     
     .filterHeader {
-        h3 {
+        .headerText {
             color: var(--txt-header-col);
             font-size: 11pt;
             margin: 0;
@@ -10,7 +10,7 @@
         }
     }
 
-    ol {
+    .ol {
         display: flex;
         flex-direction: column;
         gap: 1px;
@@ -27,11 +27,10 @@
             }
         }
 
-        li {
-           a {
+        .option {
             display: flex;
             padding: 12px 12px 12px 12px;
-           } 
         }
+
     }
 }
