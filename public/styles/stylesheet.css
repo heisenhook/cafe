@@ -34,6 +34,13 @@ body {
     overflow: hidden;
 }
 
+.mWrapper {
+    margin: 0;
+    top: unset;
+    gap: unset;
+    height: unset;
+}
+
 .wrappa {
     display: flex;
     flex-direction: row;
@@ -60,6 +67,14 @@ body {
             font-size: 18pt;
             margin: 0;
         }
+
+        .mHeaderText {
+            font-size: 4em;
+        }
+    }
+
+    .mHeaderBtn {
+        color: black;
     }
 
     .alignRight {
@@ -80,6 +95,10 @@ body {
     }
 }
 
+.mHeader {
+    padding: 1em 1em 1em 1em;
+}
+
 .container {
     background-color: var(--bg-container-col);
     border: 1px solid var(--brd-col);
@@ -91,6 +110,10 @@ body {
     height: 82vh;
 }
 
+.mContainer {
+    height: 100vh;
+}
+
 #content {
     flex: 1;
 }
@@ -98,7 +121,6 @@ body {
 #cart {
     flex-direction: column;
     padding: 0;
-    width: 340px;
     flex: 0 0 340px;
     justify-content: space-between;
 
@@ -136,9 +158,18 @@ body {
     padding-bottom: 4px;
 }
 
+.mModifyInfo {
+    border-bottom: 0.2em solid var(--brd-col);
+}
+
 .modifyImage {
     height: 330px;
     width: 340px;
+}
+
+.mModifyImage {
+    height: 64em;
+    width: 64em;
 }
 
 .modifyText {
@@ -155,11 +186,23 @@ body {
         margin: 0;
         padding: 0;
     }
+
+    .mName {
+        font-size: 4em;
+    }
     
     .price {
         margin: 0;
         padding: 0;
     }
+
+    .mPrice {
+        font-size: 4em;
+    }
+}
+
+.mModifyText {
+    padding: 0 4em 0 1em;
 }
 
 .modifiers {
@@ -181,6 +224,10 @@ body {
             margin: 0;
             padding: 0;
         }
+        
+        .mModifierName {
+            font-size: 2em;
+        }
 
         .bar {
             display: flex;
@@ -190,6 +237,10 @@ body {
             .value {
                 width: 100%;
                 margin: 2px 6px 2px 6px;
+            }
+
+            .mValue {
+                width: 94vw;
             }
 
             .value::-webkit-slider-thumb {
@@ -206,6 +257,14 @@ body {
                 user-select: none;
             }
 
+            .mRange {
+                font-size: 1.5em;
+            }
+
+        }
+
+        .mBar {
+            row-gap: 1em;
         }
     }
 
@@ -239,6 +298,10 @@ body {
         box-shadow: 0.5px 0.5px 4px 0px #0000;
     }
 
+    .mCheckoutButton {
+        height: 6em;
+    }
+
     .checkoutButton:hover {
         transition: 0.5s;
         box-shadow: 0.5px 0.5px 4px 0px #00000052;
@@ -258,4 +321,11 @@ body {
         transition: 0.5s;
         box-shadow: 0.5px 0.5px 4px 0px #ee8282;
     }
+}
+
+.mCheckoutContainer {
+    gap: 1.5em;
+    padding-left: 1em;
+    padding-right: 4em;
+    padding-bottom: 10em;
 }

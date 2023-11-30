@@ -3,30 +3,41 @@
     <head>
         <title><%= title %></title>
         <link rel="stylesheet" type="text/css" href="/styles/stylesheet.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <script src='/socket.io/socket.io.js'></script>
         <script src="/js/script.js"></script>
+        <style>
+            .material-symbols-outlined {
+              font-variation-settings:
+              'FILL' 0,
+              'wght' 400,
+              'GRAD' 0,
+              'opsz' 24
+            }
+            </style>
     </head>
     <body>
-        <div class="wrapper">
-            <div class="header">
+        <div class="wrapper mWrapper">
+            <div class="header mHeader">
                 <div class="name">
-                    <h1 class="headerText"><%- locationInfo.locationObj.name %></h1>
+                    <h1 class="headerText mHeaderText"><%- locationInfo.locationObj.name %></h1>
                 </div>
 
-                <!--
+                
                 <div class="alignRight">
                     <div class="btns">
+                        <span id="cartToggle" class="mHeaderBtn material-symbols-outlined" style="font-size: 5em;">shopping_cart</span>
                     </div>
                     
-                    <div class="status" style="background-color: <%- locationInfo.locationObj.status == 'ACTIVE' ? 'var(--bg-open-col)' : 'var(--bg-close-col)' %>">
+                    <!-- <div class="status" style="background-color: <%- locationInfo.locationObj.status == 'ACTIVE' ? 'var(--bg-open-col)' : 'var(--bg-close-col)' %>">
                         <span><%- locationInfo.locationObj.status == 'ACTIVE' ? 'OPEN' : 'CLOSED' %></span>
-                    </div>
+                    </div> -->
                 </div>
-                -->
+                
 
             </div>
             <div class="wrappa">
-                <div id="content" class="container">
+                <div id="content" class="container mContainer">
                     <!-- <div class="filters">
                         <%- include('partials/filterCategory') %>
                     </div> -->
@@ -34,7 +45,7 @@
 
                     </div>
                 </div>
-                <div id="cart" class="container">
+                <div id="cart" class="container mContainer" style="display: none;">
 
                 </div>
             </div>

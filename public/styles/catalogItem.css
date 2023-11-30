@@ -17,6 +17,11 @@
         height: 180px;
     }
 
+    .mCatalogImage {
+        width: 23em;
+        height: 23em;
+    }
+
     .itemInfo {
         background-color: var(--bg-col);
         display: flex;
@@ -29,7 +34,10 @@
             display: flex;
             font-size: 9pt;
             font-weight: bold;
+        }
 
+        .mItemName {
+            font-size: 2em;
         }
     
         .itemPrice {
@@ -42,5 +50,15 @@
             transform:scale(1.2, 1);
             transform-origin: 0 0;
         }
+
+        .mItemPrice {
+            font-size: 4em;
+        }
+
     }
+}
+
+.mCatalogItem {
+    margin-right: 1em;
+    margin-bottom: 1em;
 }
