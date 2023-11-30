@@ -1,5 +1,5 @@
 :root{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     --bg-col: #F8F9FC;
     --bg-container-col: #ffffff;
     --bg-open-col: #7fe66c;
@@ -216,21 +216,59 @@ body {
     justify-content: flex-end;
     padding-bottom: 10px;
     margin-top: auto;
+    gap: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
     
     .checkoutButton {
         cursor: pointer;
-        background-color: var(--checkout-btn-col);
-        border: none;
+        background-color: #FDFDFD;
+        border: 1px solid #00000024;
         border-radius: 4px;
         display: block;
         margin: auto;
         padding: 0;
         height: 48px;
-        width: 94%;
-        box-shadow: 1px 1px 1px 1px #00000038;
-        font-family: arial;
+        width: 100%;
         font-weight: bold;
         font-size: 16pt;
-        color: rgb(0, 0, 0);
+        color: #3c3c3c;
+
+        transition: 0.3s;
+        box-shadow: 0.5px 0.5px 4px 0px #0000;
+    }
+
+    .checkoutButton:hover {
+        transition: 0.5s;
+        box-shadow: 0.5px 0.5px 4px 0px #00000057;
+    }
+
+    #saveBtn {
+        background-color: #96ff4e4a;
+        color: #393939;
+        border: none;
+
+        transition: 0.3s;
+        box-shadow: 0.5px 0.5px 4px 0px #abc16d70;
+    }
+
+    #saveBtn:hover {
+        transition: 0.5s;
+        box-shadow: 0.5px 0.5px 4px 0px #aac16d;
+    }
+
+    #deleteBtn {
+        width: 40%;
+        background-color: #fff4f4;
+        color: #393939;
+        border: none;
+
+        transition: 0.3s;
+        box-shadow: 0.5px 0.5px 4px 0px #ee828270;
+    }
+
+    #deleteBtn:hover {
+        transition: 0.5s;
+        box-shadow: 0.5px 0.5px 4px 0px #ee8282;
     }
 }
