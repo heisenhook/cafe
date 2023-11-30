@@ -1,4 +1,5 @@
 const express = require('express');
+const useragent = require('express-useragent');
 const path = require('path');
 const nocache = require('nocache');
 const cookieParser = require('cookie-parser');
@@ -17,6 +18,7 @@ app.set('view engine', 'ejs');
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 // app.use(logger("dev"));
 app.use(nocache());
+app.use(useragent.express());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false

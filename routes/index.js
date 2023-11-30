@@ -1,5 +1,5 @@
 const express = require('express');
-const mobile = require('is-mobile');
+const useragent = require('express-useragent');
 const { v4: uuidv4 } = require('uuid');
 const { 
     catalogApi,
@@ -20,15 +20,15 @@ router.get('/', async (req, res, next) => {
     try {
         const { result: { locations } } = await locationsApi.listLocations(); // retrieve locations
         const { result: { objects } } = await catalogApi.listCatalog(undefined, types); // retrieve catalogItem & catalogImage
-        
-        console.log(mobile());
 
-        if (mobile()) {
+        if (req.useragent.isMobile) {
             res.render('mobile', {
                 title: 'mobile',
                 locationInfo: new LocationInfo(locations[0]),
                 items: new CatalogList(objects).items
             })
+
+            return;
         }
 
         res.render('index', {
