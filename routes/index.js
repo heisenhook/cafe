@@ -20,6 +20,16 @@ router.get('/', async (req, res, next) => {
     try {
         const { result: { locations } } = await locationsApi.listLocations(); // retrieve locations
         const { result: { objects } } = await catalogApi.listCatalog(undefined, types); // retrieve catalogItem & catalogImage
+        
+        console.log(mobile());
+
+        if (mobile()) {
+            res.render('mobile', {
+                title: 'mobile',
+                locationInfo: new LocationInfo(locations[0]),
+                items: new CatalogList(objects).items
+            })
+        }
 
         res.render('index', {
             title: 'index',

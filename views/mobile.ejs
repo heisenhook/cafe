@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel="stylesheet" type="text/css" href="/styles/stylesheet.css">
+        <script src='/socket.io/socket.io.js'></script>
+        <script src="/js/script.js"></script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="header">
+                <div class="name">
+                    <h1 class="headerText"><%- locationInfo.locationObj.name %></h1>
+                </div>
+
+                <!--
+                <div class="alignRight">
+                    <div class="btns">
+                    </div>
+                    
+                    <div class="status" style="background-color: <%- locationInfo.locationObj.status == 'ACTIVE' ? 'var(--bg-open-col)' : 'var(--bg-close-col)' %>">
+                        <span><%- locationInfo.locationObj.status == 'ACTIVE' ? 'OPEN' : 'CLOSED' %></span>
+                    </div>
+                </div>
+                -->
+
+            </div>
+            <div class="wrappa">
+                <div id="content" class="container">
+                    <!-- <div class="filters">
+                        <%- include('partials/filterCategory') %>
+                    </div> -->
+                    <div id="catalog" class="catalog">
+
+                    </div>
+                </div>
+                <div id="cart" class="container">
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
