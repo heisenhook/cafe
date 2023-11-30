@@ -33,6 +33,12 @@ var cart = {
         });
 
         this.total = calculateCartTotal();
+
+        if (modifiers.length < 1) {
+            buildCart(); // why render modifications if there are none
+            return;
+        }
+
         buildCart(this.items.length - 1); // pass the cart item indice to buildCart to render item modifications
     },
 
