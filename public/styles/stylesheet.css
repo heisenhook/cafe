@@ -12,7 +12,7 @@
 body, html {
     margin: 0;
     height: 100%;
-    overflow: none;
+    overflow: hidden;
 }
 
 body {
@@ -164,6 +164,9 @@ body {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    gap: 2px;
     padding: 6px 10px 6px 10px;
 
     .slider {
