@@ -1,5 +1,5 @@
 :root{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     --bg-col: #F8F9FC;
     --bg-container-col: #ffffff;
     --bg-open-col: #7fe66c;
@@ -123,6 +123,8 @@ body {
     flex: 1;
     flex-wrap: wrap;
     padding-top: 8px;
+    align-items: center;
+    justify-content: center;
 }
 
 .modifyInfo {

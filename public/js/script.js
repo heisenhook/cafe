@@ -112,8 +112,8 @@ function buildCatalogItem(item) { // item: catalogItemObj
             <img class="catalogImage" src="${img}">
                 
             <div class="itemInfo">
-                <h3 class="itemPrice" >${price}</h3>
-                <span class="itemName" >${name}</span>
+                <h3 class="itemPrice">${price}</h3>
+                <span class="itemName">${name}</span>
             </div>
         </div>
     `;
@@ -142,7 +142,7 @@ function buildCartItem(item) {
         <div class="cartItem">
             <div class="cartItemInfo">
                 <img class="cartItemImage" src="${img}">
-                <span class="cartItemName" >${name}</span>
+                <span class="cartItemName">${name}</span>
             </div>
         </div>
     `;

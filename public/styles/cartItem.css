@@ -23,7 +23,12 @@
         }
     
         .cartItemName {
+            color: var(--txt-header-col);
+            margin: 0;
+            display: inline-block;
             font-size: 15pt;
+            transform:scale(1.2, 1);
+            transform-origin: 0 0;
         }
     }
 
