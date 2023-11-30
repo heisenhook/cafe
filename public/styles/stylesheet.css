@@ -116,10 +116,12 @@ body {
 }
 
 .catalog {
-    display: block;
-    float: left;
+    display: flex;
+    overflow-x: hidden;
     overflow-y: auto;
+    max-width: 100%;
     flex: 1;
+    flex-wrap: wrap;
     padding-top: 8px;
 }
 
