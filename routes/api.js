@@ -20,7 +20,7 @@ function convertBigIntToString(obj) {
 }
   
 router.get('/catalog/', async (req, res, next) => {
-    const types = "ITEM,IMAGE";
+    const types = "ITEM,IMAGE,CATEGORY,MODIFIER_LIST";
     try {
 
         const { result: { objects } } = await catalogApi.listCatalog(undefined, types);
