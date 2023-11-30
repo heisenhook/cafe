@@ -176,7 +176,17 @@ function buildCart(id = null) { // id: the indice of the item in cart
             <button id="checkoutBtn" class="checkoutButton">${formatPrice(cart.total)}</button>
         </div>
         `;
-    
+
+        checkoutBtn = document.getElementById('checkoutBtn');
+        
+        checkoutBtn.addEventListener('mouseover', () => {
+            checkoutBtn.innerHTML = `Checkout`;
+        });
+
+        checkoutBtn.addEventListener('mouseout', () => {
+            checkoutBtn.innerHTML = formatPrice(cart.total);
+        });
+        
         for (let i = 0; i < document.getElementsByClassName('cartItem').length; i++) {
             document.getElementsByClassName('cartItem')[i].addEventListener('click', () => buildCart(i));
         }
