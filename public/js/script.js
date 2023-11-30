@@ -43,8 +43,15 @@ var cart = {
             cart.items[id].modifiers[i].value = arr[i].value;
         }
 
+        this.total = calculateCartTotal();
         buildCart();
     },
+
+    delete : function(id) { // id: cart item index
+        this.items.splice(id, 1);
+        this.total = calculateCartTotal();
+        buildCart();
+    }
 
 };
 
@@ -220,11 +227,13 @@ function buildCart(id = null) { // id: the indice of the item in cart
                 </div>
                 <div class="checkoutContainer">
                     <button id="saveBtn" class="checkoutButton">Save Item</button>
+                    <button id="deleteBtn" class="checkoutButton">Delete</button>
                 </div>
             `;
 
             document.getElementById('cart').innerHTML = html;
             document.getElementById('saveBtn').addEventListener('click', () => { cart.save(id) });
+            document.getElementById('deleteBtn').addEventListener('click', () => { cart.delete(id) });
         }
     }
 }
