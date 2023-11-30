@@ -108,6 +108,16 @@ body {
     column-gap: 8px;
     flex: 1;
     height: 82vh;
+
+    transition: 0.2s;
+    filter: none;
+}
+
+.containerDisable {
+    pointer-events: none;
+
+    transition: 0.2s;
+    filter: grayscale();
 }
 
 .mContainer {

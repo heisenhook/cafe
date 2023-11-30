@@ -208,7 +208,9 @@ function buildCart(id = null) { // id: the indice of the item in cart
     }
 
     // if an id was passed, render individual item w/ modification options
+    let content = document.getElementById('content');
     let item = getItemIndice(cart.items[id].id);
+    content.classList.add('containerDisable');
 
     if (item !== null && square[item].itemData.variations && square[item].itemData.variations.length > 0) {
         let name = square[item].itemData.name;
@@ -254,8 +256,8 @@ function buildCart(id = null) { // id: the indice of the item in cart
             `;
 
             document.getElementById('cart').innerHTML = html;
-            document.getElementById('saveBtn').addEventListener('click', () => { cart.save(id) });
-            document.getElementById('deleteBtn').addEventListener('click', () => { cart.delete(id) });
+            document.getElementById('saveBtn').addEventListener('click', () => { content.classList.remove('containerDisable');; cart.save(id) });
+            document.getElementById('deleteBtn').addEventListener('click', () => { content.classList.remove('containerDisable');; cart.delete(id) });
         }
     }
 }
