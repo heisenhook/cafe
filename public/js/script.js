@@ -11,34 +11,72 @@ var cart = {
 
     ],
 
-    add : function(id) {
-        for (let i = 0; i < square.length; i++) { // loop until id is matched with catalogItem id
-            if (square[i].type === "ITEM" && square[i].id == catalog[id]) {
-                this.items.push({ // push square id, price & modifier data to obj
-                    id : square[i].id,
-                    price : square[i].itemData.variations[0].itemVariationData.priceMoney.amount,
-                    modifiers : square[i].itemData.modifierListInfo
-                });
+    add : function(id) { // id: catalog index of square ID
+        let item = square[getItemIndice(catalog[id])];
 
-                buildCart(square[i].id); // pass the square id of added item to buildCart(), prompting modifications to item
+        let arr = getItemModifiers(item);
+        let modifiers = [];
+
+        if (arr && Array.isArray(arr) && arr.length > 0) {
+            for (let i = 0; i < arr.length; i++) {
+                modifiers.push({
+                    id: arr[i],
+                    value: 0,
+                });
             }
         }
+
+        this.items.push({ // push square id, price & modifier data to obj
+            id : item.id,
+            price : item.itemData.variations[0].itemVariationData.priceMoney.amount,
+            modifiers,
+        });
+
+        this.total = calculateCartTotal();
+        buildCart(this.items.length - 1); // pass the cart item indice to buildCart to render item modifications
+    },
+
+    save : function(id) { // id : cart item index
+        let arr = document.getElementsByClassName('value');
+
+        for (let i = 0; i < arr.length; i++) {
+            cart.items[id].modifiers[i].value = arr[i].value;
+        }
+
+        buildCart();
     },
 
 };
 
-function getItemIndice(id) {
-    for (let i = 0; i < square.length; i++) { //
-        if (square[i].type === "ITEM" && square[i].id == id) {
+function formatPrice(x) {
+    return x !== null ? `$${(parseInt(x) / 100).toFixed(2)}` : 'null';
+}
+
+function getItemIndice(id) { // id: square ID of item
+    for (let i = 0; i < square.length; i++) {
+        if (square[i].id == id) {
             return i;
         }
     }
 }
 
-function getImageUrl(item) {
+function getItemModifiers(item) { // item: catalogItemObj
+    if (item.itemData.modifierListInfo) {
+        let arr = [];
+        for (let i = 0; i < item.itemData.modifierListInfo.length; i++) {
+            if (item.itemData.modifierListInfo[i].enabled) {
+                arr.push(item.itemData.modifierListInfo[i].modifierListId);
+            }
+        }
+
+        return arr;
+    }
+}
+
+function getImageUrl(item) { // item: catalogItemObj
     let img = '/img/null.png';
 
-    // Check if item.itemData is defined before accessing its properties
+    // check if item.itemData is defined before accessing its properties
     if (item.itemData && item.itemData.imageIds) {
         for (let i = 0; i < square.length; i++) {
             if (square[i].type === "IMAGE" && square[i].id === item.itemData.imageIds[0]) {
@@ -62,13 +100,9 @@ function calculateCartTotal() {
     return total;
 }
 
-function buildCatalogItem(item) {
+function buildCatalogItem(item) { // item: catalogItemObj
     let img = getImageUrl(item);
-
-    let price = (item.itemData.variations[0].itemVariationData.priceMoney && item.itemData.variations[0].itemVariationData.priceMoney.amount !== null) ?
-        `$${(parseInt(item.itemData.variations[0].itemVariationData.priceMoney.amount.toString()) / 100).toFixed(2)}` :
-        'null';
-
+    let price = formatPrice(item.itemData.variations[0].itemVariationData.priceMoney.amount);
     let name = item.itemData.name;
 
     return `
@@ -118,10 +152,10 @@ function modifyCartItem(id) {
     console.log(id);
 }
 
-function buildCart(id = null) {
+function buildCart(id = null) { // id: the indice of the item in cart
     document.getElementById('cart').innerHTML = '';
 
-    if (id === null) { // if no square id was passed, then render all items in list format
+    if (id === null) { // if no cart indice was passed, then render all items in list format
         for (let i = 0; i < cart.items.length; i++) {
             for (let j = 0; j < square.length; j++) {
                 if (square[j].type === "ITEM" && square[j].id === cart.items[i].id) {
@@ -129,26 +163,50 @@ function buildCart(id = null) {
                 }
             }
         }
+        
+        document.getElementById('cart').innerHTML += `
+        <div class="checkoutContainer">
+            <button id="checkoutBtn" class="checkoutButton">${formatPrice(cart.total)}</button>
+        </div>
+        `;
     
         for (let i = 0; i < document.getElementsByClassName('cartItem').length; i++) {
-            document.getElementsByClassName('cartItem')[i].addEventListener('click', () => modifyCartItem(i));
+            document.getElementsByClassName('cartItem')[i].addEventListener('click', () => buildCart(i));
         }
     
-        cart.total = calculateCartTotal();
+        
         return;
     }
 
-    // if a square id was passed, render individual item w/ modification options
-    let item = getItemIndice(id);
+    // if an id was passed, render individual item w/ modification options
+    let item = getItemIndice(cart.items[id].id);
 
     if (item !== null && square[item].itemData.variations && square[item].itemData.variations.length > 0) {
         let name = square[item].itemData.name;
         
-        // Check if variations[0] is defined before accessing its properties
+        // check if variations[0] is defined before accessing its properties
         if (square[item].itemData.variations[0]) {
-            let price = square[item].itemData.variations[0].itemVariationData.priceMoney.amount;
-            let img = getImageUrl(item);
-    
+            let price = formatPrice(square[item].itemData.variations[0].itemVariationData.priceMoney.amount);
+            let img = getImageUrl(square[item]);
+            
+            let mods = ``;
+            let arr = getItemModifiers(square[item]);
+
+            if (arr && Array.isArray(arr) && arr.length > 0) {
+                for (let i = 0; i < arr.length; i++) {
+                    mods += `
+                    <div class="slider">
+                        <h3 class="modifierName" >${square[getItemIndice(arr[i])].modifierListData.name}</h3>
+                        <div class="bar">
+                            <h4 class="range">0</h4>
+                            <input type="range" min="0" max="${square[getItemIndice(arr[i])].modifierListData.modifiers.length}" value="${cart.items[id].modifiers[i].value}" class="value">
+                            <h4 class="range">${square[getItemIndice(arr[i])].modifierListData.modifiers.length}</h4>
+                        </div>
+                    </div>
+                    `;
+                }
+            }
+
             let html = `
                 <div class="modifyInfo">
                     <img class="modifyImage" src="${img}">
@@ -158,29 +216,17 @@ function buildCart(id = null) {
                     </div>
                 </div>
                 <div class="modifiers">
-                    <div class="slider">
-                        <h3 class="modifierName" >modifier name</h3>
-                        <div class="bar" >
-                            <h4 class="range" >0</h4>
-                            <input type="range" min="0" max="5" value="0" class="value">
-                            <h4 class="range" >5</h4>
-                        </div>
-                    </div>
+                ${mods}
                 </div>
                 <div class="checkoutContainer">
-                    <button class="checkoutButton" >Save Item</button>
+                    <button id="saveBtn" class="checkoutButton">Save Item</button>
                 </div>
             `;
 
             document.getElementById('cart').innerHTML = html;
-        } else {
-            console.error(`Variation for item with id ${id} is undefined or empty.`);
+            document.getElementById('saveBtn').addEventListener('click', () => { cart.save(id) });
         }
-    } else {
-        console.error(`Unable to build cart item for id: ${id}`);
     }
-    
-    
 }
 
 function init() {
