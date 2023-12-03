@@ -225,6 +225,7 @@ function buildCart(id = null) { // id: the indice of the item in cart
 
             if (arr && Array.isArray(arr) && arr.length > 0) {
                 for (let i = 0; i < arr.length; i++) {
+                    // please ignore this
                     mods += `
                     <div class="slider">
                         <h3 class="${window.mobileCheck() ? `modifierName mModifierName` : `modifierName`}" >${square[getItemIndice(arr[i])].modifierListData.name}</h3>
@@ -238,6 +239,7 @@ function buildCart(id = null) { // id: the indice of the item in cart
                 }
             }
 
+            // and this
             let html = `
                 <div class="${window.mobileCheck() ? `modifyInfo mModifyInfo` : `modifyInfo`}">
                     <img class="${window.mobileCheck() ? `modifyImage mModifyImage` : `modifyImage`}" src="${img}">
